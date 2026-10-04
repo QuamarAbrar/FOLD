@@ -1998,6 +1998,16 @@ export default function App() {
           >
             REFINING / THE UNHURRIED WORKDAY
           </p>
+          <div
+            className="h-[220px] relative shrink-0 w-full"
+            data-name="Refinement outfit preview"
+          >
+            <img
+              alt="A sand blazer styled with an ivory top and relaxed dark trousers."
+              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+              src={imgOutfitPhotograph}
+            />
+          </div>
           <p
             className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#302820] text-[14px] whitespace-nowrap"
             data-node-id="1:311"
