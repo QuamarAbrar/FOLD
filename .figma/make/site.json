@@ -1,0 +1,10 @@
+{
+  "description": "Delivers a visually stunning website with premium scroll-through animations inspired by award-winning designs, enhancing user engagement and experience.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

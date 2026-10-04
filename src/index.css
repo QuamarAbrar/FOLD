@@ -1,0 +1,701 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter:Medium";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Inter:Regular";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+:root {
+  color: #302820;
+  background: #f8f5ef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f8f5ef;
+}
+
+button,
+a {
+  color: inherit;
+}
+
+.site-root {
+  min-height: 100dvh;
+  isolation: isolate;
+}
+
+.site-root::before {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgb(216 195 168 / 13%) 0%,
+    rgb(216 195 168 / 0%) 68%
+  );
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(
+    calc(var(--pointer-x, 50vw) - 50%),
+    calc(var(--pointer-y, 50vh) - 50%),
+    0
+  );
+  transition: opacity 500ms ease;
+  mix-blend-mode: multiply;
+}
+
+.site-root.has-pointer::before {
+  opacity: 1;
+}
+
+.scroll-progress {
+  position: fixed !important;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #302820;
+  pointer-events: none;
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.site-root [data-name="Navigation"] {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, #d8c3a8 91%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.site-root [data-name="Action"],
+.site-root [data-name="Preference"],
+.site-root [data-name="Save outfit"] {
+  cursor: pointer;
+  transition:
+    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease;
+}
+
+.site-root [data-name="Action"]:hover,
+.site-root [data-name="Save outfit"]:hover {
+  transform: translateY(-3px);
+}
+
+.site-root [data-name="Preference"]:hover {
+  transform: translateY(-2px);
+  border-color: #302820;
+}
+
+.site-root [data-name="Action"] img {
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-root [data-name="Action"]:hover img {
+  transform: translate(2px, -2px);
+}
+
+.site-root [data-name="Fashion campaign"] [data-node-id="1:20"],
+.site-root [data-name="Fashion campaign"] [data-node-id="1:21"],
+.site-root [data-name="Fashion campaign"] [data-node-id="1:22"],
+.site-root [data-name="Fashion campaign"] [data-name="Start journey"] {
+  opacity: 0;
+  animation: hero-in 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.site-root [data-name="Fashion campaign"] [data-node-id="1:21"] {
+  animation-delay: 100ms;
+}
+
+.site-root [data-name="Fashion campaign"] [data-node-id="1:22"] {
+  animation-delay: 200ms;
+}
+
+.site-root [data-name="Fashion campaign"] [data-name="Start journey"] {
+  animation-delay: 300ms;
+}
+
+.site-root [data-name="Campaign portrait"] {
+  clip-path: inset(0 100% 0 0);
+  animation: image-wipe 1.25s 180ms cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(44px);
+  transition:
+    opacity 900ms var(--reveal-delay, 0ms) cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms var(--reveal-delay, 0ms) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading-reveal {
+  clip-path: inset(0 0 105% 0);
+  transform: translateY(32px);
+  transition:
+    clip-path 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heading-reveal.is-visible {
+  clip-path: inset(0 -0.08em -0.12em 0);
+  transform: translateY(0);
+}
+
+.parallax-image {
+  transform: translate3d(0, var(--parallax, 0), 0) scale(1.08);
+  transition: transform 80ms linear;
+  will-change: transform;
+}
+
+.site-root [data-name="Brand philosophy"] > p:nth-child(2),
+.site-root [data-name="Wardrobe introduction"] [data-node-id="1:277"],
+.site-root [data-name="Invitation copy"] [data-node-id="1:400"] {
+  transform: translateY(var(--section-shift, 0));
+  transition: transform 120ms linear;
+  will-change: transform;
+}
+
+.site-root [data-name="Principles"] > p {
+  animation: principle-breathe 4.8s ease-in-out infinite;
+}
+
+.site-root [data-name="Principles"] > p:nth-child(2) {
+  animation-delay: 600ms;
+}
+
+.site-root [data-name="Principles"] > p:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.site-root [data-name="Principles"] > p:nth-child(4) {
+  animation-delay: 1.8s;
+}
+
+.site-root [data-name="arrow-down"] {
+  animation: scroll-cue 1.8s ease-in-out infinite;
+}
+
+.site-root [data-name="Photo caption"] {
+  transition:
+    background-color 400ms ease,
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-root [data-name="Campaign portrait"]:hover [data-name="Photo caption"] {
+  background: rgb(48 40 32 / 92%);
+  transform: translateY(-5px);
+}
+
+.site-root [data-name="Question row"] [data-name="plus"] {
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-root [data-name="Question row"]:hover [data-name="plus"] {
+  transform: rotate(90deg);
+}
+
+.site-root [data-name="Colour choice"] [data-name="Swatch"] {
+  transition:
+    transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 400ms ease;
+}
+
+.site-root [data-name="Colour choice"]:hover [data-name="Swatch"] {
+  box-shadow: 0 8px 20px rgb(48 40 32 / 16%);
+  transform: translateY(-4px) scale(1.08);
+}
+
+.site-root [data-name="Outfit editorial"],
+.site-root [data-name="Piece photograph"],
+.site-root [data-name="Personal style image"],
+.site-root [data-name="Slow fashion editorial"],
+.site-root [data-name="Fashion closing detail"] {
+  overflow: hidden;
+}
+
+.site-root [data-name="Outfit recommendation"] [data-name="Outfit photograph"] {
+  overflow: hidden;
+}
+
+.site-root [data-name="Outfit recommendation"] [data-name="Outfit photograph"] img,
+.site-root [data-name="Wardrobe piece"] img {
+  transition:
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 500ms ease;
+}
+
+.site-root [data-name="Outfit recommendation"]:hover [data-name="Outfit photograph"] img,
+.site-root [data-name="Wardrobe piece"]:hover img {
+  filter: saturate(0.9) contrast(1.03);
+}
+
+.site-root [data-name="Outfit recommendation"]:hover [data-name="Outfit photograph"] img {
+  transform: translate3d(0, var(--parallax, 0), 0) scale(1.13);
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes image-wipe {
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes principle-breathe {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1180px) {
+  .site-root [data-name="Navigation"],
+  .site-root
+    > div:not(.scroll-progress):not([data-name="Opening editorial"]):not(
+      [data-name="The FOLD philosophy"]
+    ):not([data-name="Begin your journey"]):not([data-name="Footer"]) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .site-root [data-name="Navigation links"] {
+    display: none;
+  }
+
+  .site-root [data-name="Editorial introduction"],
+  .site-root [data-name="Campaign portrait"] {
+    width: 50%;
+  }
+
+  .site-root [data-name="Editorial introduction"] {
+    padding-left: 40px;
+    padding-right: 36px;
+  }
+
+  .site-root [data-name="Opening copy"] [data-node-id="1:21"] {
+    font-size: clamp(46px, 5vw, 64px);
+  }
+
+  .site-root [data-name="Profile workspace"] {
+    align-items: stretch;
+  }
+
+  .site-root [data-name="Style inspiration"] {
+    width: 36%;
+    height: auto;
+  }
+
+  .site-root [data-name="Preference controls"] {
+    height: auto;
+  }
+
+  .site-root [data-name="Wardrobe aware styling"] {
+    gap: 40px;
+  }
+
+  .site-root [data-name="Wardrobe introduction"] {
+    width: 34%;
+  }
+
+  .site-root [data-name="Refinement sample"] {
+    width: 52%;
+  }
+
+  .site-root [data-name="Refine your suggestions"],
+  .site-root [data-name="Questions before you begin"] {
+    gap: 56px;
+  }
+}
+
+@media (max-width: 800px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .site-root [data-name="Navigation"] {
+    height: 72px;
+    padding-inline: 20px;
+  }
+
+  .site-root::before {
+    display: none;
+  }
+
+  .site-root [data-name="Navigation"] > p {
+    font-size: 28px;
+  }
+
+  .site-root [data-name="Account actions"] > p {
+    display: none;
+  }
+
+  .site-root [data-name="Fashion campaign"] {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .site-root [data-name="Editorial introduction"],
+  .site-root [data-name="Campaign portrait"] {
+    width: 100%;
+  }
+
+  .site-root [data-name="Editorial introduction"] {
+    min-height: 650px;
+    padding: 56px 20px 30px;
+  }
+
+  .site-root [data-name="Opening copy"] [data-node-id="1:21"] {
+    font-size: clamp(43px, 13vw, 60px);
+  }
+
+  .site-root [data-name="Opening copy"] [data-node-id="1:22"] {
+    width: 100%;
+    max-width: 440px;
+    font-size: 15px;
+  }
+
+  .site-root [data-name="Start journey"] {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .site-root [data-name="Editorial footnote"] {
+    margin-top: 48px;
+  }
+
+  .site-root [data-name="Style detail"] {
+    width: auto;
+  }
+
+  .site-root [data-name="Campaign portrait"] {
+    height: 78svh;
+    min-height: 540px;
+  }
+
+  .site-root [data-name="Photo caption"] {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    width: auto;
+  }
+
+  .site-root [data-name="Principles"] {
+    height: auto;
+    padding: 22px 20px;
+    flex-wrap: wrap;
+    gap: 18px 30px;
+  }
+
+  .site-root
+    > div:not(.scroll-progress):not([data-name="Opening editorial"]):not(
+      [data-name="The FOLD philosophy"]
+    ):not([data-name="Begin your journey"]):not([data-name="Footer"]) {
+    padding: 72px 20px;
+  }
+
+  .site-root [data-name="Section introduction"] {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .site-root [data-name="Title group"],
+  .site-root [data-name="Section introduction"] > p {
+    width: 100%;
+  }
+
+  .site-root [data-name="Title group"] > p:last-child {
+    font-size: clamp(38px, 10.5vw, 52px);
+    line-height: 1.08;
+    white-space: normal;
+  }
+
+  .site-root [data-name="Journey steps"],
+  .site-root [data-name="Profile workspace"],
+  .site-root [data-name="Wardrobe aware styling"],
+  .site-root [data-name="Refine your suggestions"],
+  .site-root [data-name="Privacy principles"],
+  .site-root [data-name="The FOLD philosophy"],
+  .site-root [data-name="Questions before you begin"],
+  .site-root [data-name="Begin your journey"],
+  .site-root [data-name="Footer navigation"] {
+    flex-direction: column;
+  }
+
+  .site-root [data-name="Journey steps"] {
+    gap: 44px;
+  }
+
+  .site-root [data-name="Profile workspace"] {
+    gap: 0;
+  }
+
+  .site-root [data-name="Style inspiration"],
+  .site-root [data-name="Preference controls"] {
+    width: 100%;
+  }
+
+  .site-root [data-name="Style inspiration"] {
+    height: auto;
+  }
+
+  .site-root [data-name="Personal style image"] {
+    height: 520px;
+  }
+
+  .site-root [data-name="Preference controls"] {
+    padding: 24px 18px;
+  }
+
+  .site-root [data-name="Practical preferences"] {
+    flex-direction: column;
+  }
+
+  .site-root [data-name="Practical preferences"] > div {
+    width: 100%;
+  }
+
+  .site-root [data-name="Profile actions"],
+  .site-root [data-name="Personalized outfit edit"] > [data-name="Section introduction"],
+  .site-root [data-name="Personal edit summary"],
+  .site-root [data-name="Edit filters"],
+  .site-root [data-name="Edit note"] {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .site-root [data-name="Personal edit summary"] > p {
+    width: 100%;
+  }
+
+  .site-root [data-name="Occasion filters"] {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .site-root [data-name="Recommendation grid"] {
+    width: calc(100% + 20px);
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .site-root [data-name="Recommendation grid"]::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-root [data-name="Outfit recommendation"] {
+    flex: 0 0 min(84vw, 390px);
+    scroll-snap-align: start;
+  }
+
+  .site-root [data-name="Outfit editorial"] {
+    height: 55svh;
+    min-height: 410px;
+  }
+
+  .site-root [data-name="Wardrobe aware styling"] {
+    padding: 76px 20px;
+  }
+
+  .site-root [data-name="Wardrobe introduction"],
+  .site-root [data-name="Wardrobe preview"] {
+    width: 100%;
+  }
+
+  .site-root [data-name="Wardrobe introduction"] [data-node-id="1:277"] {
+    font-size: clamp(44px, 12vw, 58px);
+  }
+
+  .site-root [data-name="Wardrobe grid"] {
+    width: calc(100% + 20px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .site-root [data-name="Wardrobe piece"] {
+    flex: 0 0 72vw;
+    scroll-snap-align: start;
+  }
+
+  .site-root [data-name="Refine your suggestions"] {
+    padding: 72px 20px;
+  }
+
+  .site-root [data-name="Refinement sample"],
+  .site-root [data-name="Refinement introduction"] {
+    width: 100%;
+  }
+
+  .site-root [data-name="Refinement sample"] {
+    padding: 24px 18px;
+  }
+
+  .site-root [data-name="Refinement introduction"] [data-node-id="1:335"] {
+    font-size: clamp(40px, 11vw, 55px);
+  }
+
+  .site-root [data-name="Privacy principles"] {
+    gap: 38px;
+  }
+
+  .site-root [data-name="The FOLD philosophy"] {
+    height: auto;
+  }
+
+  .site-root [data-name="Slow fashion editorial"] {
+    width: 100%;
+    height: 72svh;
+    min-height: 500px;
+  }
+
+  .site-root [data-name="Brand philosophy"] {
+    min-height: 500px;
+    padding: 54px 20px 38px;
+  }
+
+  .site-root [data-name="Brand philosophy"] [data-node-id="1:364"] {
+    font-size: clamp(36px, 10vw, 48px);
+  }
+
+  .site-root [data-name="Questions introduction"],
+  .site-root [data-name="Questions"] {
+    width: 100%;
+  }
+
+  .site-root [data-name="Question title"] > p,
+  .site-root [data-name="Question row"] > p {
+    white-space: normal;
+    padding-right: 20px;
+  }
+
+  .site-root [data-name="Begin your journey"] {
+    height: auto;
+  }
+
+  .site-root [data-name="Invitation copy"] {
+    width: 100%;
+    min-height: 560px;
+    padding: 64px 20px;
+  }
+
+  .site-root [data-name="Invitation copy"] [data-node-id="1:400"] {
+    font-size: clamp(42px, 12vw, 64px);
+  }
+
+  .site-root [data-name="Invitation actions"] {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .site-root [data-name="Fashion closing detail"] {
+    width: 100%;
+    height: 60svh;
+    min-height: 420px;
+  }
+
+  .site-root [data-name="Footer"] {
+    padding: 56px 20px 28px;
+  }
+
+  .site-root [data-name="Footer navigation"] {
+    gap: 50px;
+  }
+
+  .site-root [data-name="Footer links"] {
+    width: 100%;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .site-root [data-name="Colophon"] {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .parallax-image {
+    transform: none;
+  }
+
+  .heading-reveal {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+  }
+}
