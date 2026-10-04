@@ -2142,12 +2142,12 @@ export default function App() {
           >
             05 / A CONVERSATION, NOT A VERDICT
           </p>
-          <p
+          <h2
             className="leading-[1.08] min-w-full relative shrink-0 text-[#302820] text-[55px] w-[min-content]"
             data-node-id="1:335"
           >
             “Almost right” is a good place to start.
-          </p>
+          </h2>
           <p
             className="leading-[1.7] min-w-full relative shrink-0 text-[#756b60] text-[16px] w-[min-content]"
             data-node-id="1:336"
